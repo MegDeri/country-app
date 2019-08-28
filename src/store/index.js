@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware} from 'redux';
+import { createStore, combineReducers } from 'redux';
 import reducers from '../reducers/index';
-import { createLogger } from 'redux-logger';
-import DevTools from './DevTools';
+import DevTools from '../DevTools';
+import { getCountries } from '../actions/actions-countries';
 
-const logger = createLogger();
 const store = createStore(
     reducers,
-    DevTools.instrument(),
-    applyMiddleware(logger)
-    );
+    DevTools.instrument()
+);
+
+store.dispatch(getCountries());
 
 export default store;
